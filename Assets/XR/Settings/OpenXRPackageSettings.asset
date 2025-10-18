@@ -97,10 +97,6 @@ MonoBehaviour:
   - {fileID: -420168611589653213}
   - {fileID: -5397059119390718949}
   - {fileID: 6540711086339887091}
-  - {fileID: 7601686283225034068}
-  - {fileID: -4165347576962938615}
-  - {fileID: -5388046089766356286}
-  - {fileID: 4206175856918386702}
   - {fileID: -4525630177675341275}
   - {fileID: 8430903678718372569}
   - {fileID: 4194816342859075245}
@@ -156,6 +152,7 @@ MonoBehaviour:
   m_Name: MetaXRFeature Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRFeature
   m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Feature
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.metaxr
@@ -305,6 +302,7 @@ MonoBehaviour:
   m_Name: MetaXRFoveationFeature Standalone
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRFoveationFeature
   m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Foveation
   version: 1.0.0
   featureIdInternal: com.meta.openxr.feature.foveation
@@ -416,11 +414,6 @@ MonoBehaviour:
   - {fileID: 9046656299848082265}
   - {fileID: -8107961540674862081}
   - {fileID: -5134081188219134888}
-  - {fileID: 1291606981203616272}
-  - {fileID: -6088316974184568883}
-  - {fileID: 6819005153234913125}
-  - {fileID: -1189401411250980027}
-  - {fileID: -3420779605937368580}
   - {fileID: -4500421825164279876}
   - {fileID: 1366908669630754631}
   - {fileID: -5668419209178480675}
@@ -475,6 +468,7 @@ MonoBehaviour:
   m_Name: MetaXRFeature Standalone
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRFeature
   m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Feature
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.metaxr
@@ -562,6 +556,7 @@ MonoBehaviour:
   m_Name: MetaXRSubsampledLayout Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRSubsampledLayout
   m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Subsampled Layout
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.subsampledLayout
@@ -662,6 +657,7 @@ MonoBehaviour:
   m_Name: MetaXRSpaceWarp Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRSpaceWarp
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Space Warp
   version: 1.0.0
   featureIdInternal: com.meta.openxr.feature.spacewarp
@@ -835,6 +831,7 @@ MonoBehaviour:
   m_Name: MetaXREyeTrackedFoveationFeature Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXREyeTrackedFoveationFeature
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Eye Tracked Foveation
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.eyetrackedfoveation
@@ -960,6 +957,7 @@ MonoBehaviour:
   m_Name: MetaXRSubsampledLayout Standalone
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRSubsampledLayout
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Subsampled Layout
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.subsampledLayout
@@ -1042,6 +1040,7 @@ MonoBehaviour:
   m_Name: MetaXRFoveationFeature Android
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXRFoveationFeature
   m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Foveation
   version: 1.0.0
   featureIdInternal: com.meta.openxr.feature.foveation
@@ -1062,6 +1061,7 @@ MonoBehaviour:
   m_Name: MetaXREyeTrackedFoveationFeature Standalone
   m_EditorClassIdentifier: Oculus.VR::Meta.XR.MetaXREyeTrackedFoveationFeature
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: Meta XR Eye Tracked Foveation
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.eyetrackedfoveation
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f647cc0545697264a9878224faada6d5, type: 3}
   m_Name: MetaQuestFeature Android
   m_EditorClassIdentifier: Unity.XR.OpenXR.Features.MetaQuestSupport::UnityEngine.XR.OpenXR.Features.MetaQuestSupport.MetaQuestFeature
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Meta Quest Support
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.metaquest
