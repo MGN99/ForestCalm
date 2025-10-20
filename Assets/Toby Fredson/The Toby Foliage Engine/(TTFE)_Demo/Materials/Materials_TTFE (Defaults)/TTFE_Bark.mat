@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TTFE_Bark
   m_Shader: {fileID: 4800000, guid: afdb1e1f380186d438f4f923b2100101, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _WINDTYPE_GENTLEBREEZE
   m_InvalidKeywords:
@@ -25,6 +27,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -80,8 +83,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _AmbientOcclusionIntensity: 1
     - _Aointensity: 1
     - _BackfaceNormalKill: 1
@@ -91,11 +107,16 @@ Material:
     - _CenterofMass: 0
     - _Cutoff: 0.5
     - _DEBUGVisualizeWindMask: 0
+    - _DIVIDER_01: 0
+    - _DIVIDER_02: 0
+    - _DIVIDER_05: 0
+    - _DIVIDER_06: 0
     - _DetailNormalMapScale: 1
     - _DirectionalBendingAmount: 3
     - _DirectionalWind: 1
     - _DirectionalWindSpeed: 4
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
     - _GentleBreeze: 0
     - _GlobalWindStrength: 1
     - _GlossMapScale: 1
@@ -114,11 +135,16 @@ Material:
     - _NormalIntensity: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PivotSway: 0
+    - _PivotSwayPower: 1
     - _PlantMassVolume: 1
     - _PlantVolumeandMass: 1
     - _PreventStrecthing_Offset: -0.2
     - _PreventStrecthing_Scale: 5
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _Radius: 1
+    - _ReceiveShadows: 1
     - _SelfShading: 0
     - _SimplePivotSway: 0
     - _SmoothnessIntensity: 1
@@ -127,6 +153,9 @@ Material:
     - _SpecularHighlights: 1
     - _Specularpower: 0
     - _SrcBlend: 1
+    - _TEXTUREMAPS: 0
+    - _TEXTURESETTINGS: 0
+    - _TTFELIGHTTREEBARKSHADER: 0
     - _TranslucencyFluffiness: 1
     - _TranslucencyPower: 1
     - _TranslucencyRange: 1
@@ -134,6 +163,7 @@ Material:
     - _VertexAo1: 0
     - _VertexNormalWarpAmount: 0
     - _VisualizeMass: 0
+    - _WINDMASKSETTINGS: 0
     - _WindDirection: 0
     - _WindOnOff: 1
     - _WindType: 0
@@ -146,3 +176,4 @@ Material:
     - _Offset: {r: 1, g: 1, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -192,3 +192,4 @@ Material:
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _Vector0: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

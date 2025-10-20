@@ -7,23 +7,20 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TTFE_Leaves
-  m_Shader: {fileID: 4800000, guid: 6f53b8cb323b0614c82237d5b033019f, type: 3}
+  m_Name: Shrub_Bark 1
+  m_Shader: {fileID: 4800000, guid: afdb1e1f380186d438f4f923b2100101, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _LEAFFLUTTER_ON
-  - _WINDTYPE_GENTLEBREEZE
+  - _WINDTYPE_WINDOFF
   m_InvalidKeywords:
+  - GentleBreeze
   - _DIRECTIONALWIND_ON
-  - _DIRECTIONWIND_ON
-  - _LIGHTDETECTBACKFACE_ON
-  - _SEASONVERTEXCOLORR_ON
-  - _TRANSLUCENCYFLUFFINESS_ON
-  - _TRANSLUCENCYTREETANGENTS_ON
-  - _VERTEXPOSITIONYOFF_ON
-  - _WINDONOFF_ON
-  - _WINDTYPE_STRONGWIND
+  - _DIRECTIONWINDONOFF_ON
+  - _FLOAT0_ON
+  - _MASKROOTS_ON
+  - _MSKIVIEW_ON
+  - _PIVOTSWAY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,7 +32,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlbedoMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 961f51f16637c464b8d9c9cf6502071c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -62,28 +59,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskMap:
-        m_Texture: {fileID: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 7abb52bf6c9d57840b9c7ef4df415559, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskMapRGBA:
-        m_Texture: {fileID: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 2800000, guid: 71cad2c9341abe04bb2f2283eca5f36d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NoiseMapGrayscale:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NoiseMask:
-        m_Texture: {fileID: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 4932220190f768e46b9368e1f9fd3adb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e84b0233d8256274d9064ca4b2f3e581, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -94,12 +87,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecularMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _WindNoise:
-        m_Texture: {fileID: 2800000, guid: b77f7b8226e9ef748a6e3a9c7a1b77f6, type: 3}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: a0ab2bcee2c1ba94f9718cab5082e192, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -120,143 +109,87 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0.4
     - _AlphaCutoff: 0.5
-    - _AmbientOcclusionIntensity: 1
-    - _BackfaceNormalKill: 0
-    - _BranchMaskR: 0
-    - _BranchWindLarge: 1
-    - _BranchWindSmall: 1
+    - _Aointensity: 1
+    - _BarkMaskView: 0
+    - _BranchWindLarge: 3
+    - _BranchWindSmall: 4
     - _BumpScale: 1
     - _CenterofMass: 0
-    - _ColorVariation: 1
     - _Cutoff: 0.5
-    - _DEBUGComputeVertexColors: 0
-    - _DEBUGVertexA: 0
-    - _DEBUGVertexB: 0
-    - _DEBUGVertexG: 0
-    - _DEBUGVertexR: 0
-    - _DEBUGVertexRGBA: 0
+    - _DEBUGVisualizeWindMask: 0
     - _DEBUGVisuliseWindMask: 0
     - _DIVIDER_01: 0
     - _DIVIDER_02: 0
-    - _DIVIDER_03: 0
-    - _DIVIDER_04: 0
     - _DIVIDER_05: 0
     - _DIVIDER_06: 0
     - _DetailNormalMapScale: 1
     - _DirectionalBendingAmount: 3
     - _DirectionalWind: 1
-    - _DirectionalWindSpeed: 4
-    - _Directionwind: 1
-    - _DryLeavesOffset: 1
-    - _DryLeavesScale: 1
+    - _DirectionalWindSpeed: 6
+    - _Directionalwind: 1
+    - _Directionwind: 0
+    - _DirectionwindOnOff: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FKS_Offset: 0.1
-    - _FKS_Scale: 1
-    - _FauxShading: 0
-    - _FlutterIntensity: 1
-    - _FlutterTangentMode: 0
+    - _Float0: 1
     - _GentleBreeze: 0
-    - _GlobalFlutterIntensity: 1
-    - _GlobalWindSpeed: 1
     - _GlobalWindStrength: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GrassColorVariation: 5
-    - _GroundBlending: 0
-    - _GroundBlendingOffset: -0.08
     - _Hardness: 1
-    - _Hardness3: 1
-    - _InvertColorMask: 0
-    - _InvertColorMask2: 0
-    - _LIGHTINGSETTINGS: 0
-    - _LeafFlutter: 1
-    - _LightDetectBackface: 1
-    - _LightDetectFrontface: 0
+    - _Hardness1: 1
+    - _Hardness3: 0
+    - _MaskRoots: 1
     - _MaskView: 0
     - _Metallic: 0
-    - _MobileShading: 0
-    - _MobileShadingWorldUp: 0
     - _Mode: 0
-    - _NormalBackFaceFixBranch: 0
-    - _NormalIntenisty: 0
+    - _Mskiview: 1
     - _NormalIntensity: 1
-    - _NormalizeSeasons: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PivotSway: 0
+    - _PivotSway: 1
     - _PivotSwayPower: 1
-    - _PlantMassVolume: 1
-    - _PlantVolumeandMass: 1
+    - _PreventBarkStretching: 0
     - _PreventStrecthing_Offset: -0.2
     - _PreventStrecthing_Scale: 5
-    - _QuadScatterOnlybasiccards: 0
-    - _Quadscatterpower: 1
+    - _PulseFrequency: 3
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius: 1
-    - _Radius3: 1
-    - _RandomColorScale: 1
-    - _RandomContrast: 1
-    - _RandomContrastOnOff: 0
+    - _RRRRRRRRRRRR: 0
+    - _Radius: 6
+    - _Radius1: 1
+    - _Radius3: 0
     - _ReceiveShadows: 1
-    - _SEASONSETTINGS: 0
-    - _SeasonChangeGlobal: 0
-    - _SeasonChnageA: 0
-    - _SeasonChnageB: 0
-    - _SeasonVertexColorR: 1
-    - _SelfShadingVertexColor: 0
+    - _SelfShading: 0
     - _SimplePivotSway: 0
-    - _SmoothnessIntensity: 0
     - _SmoothnessTextureChannel: 0
-    - _Speckbakcfacefix: 0
-    - _SpecularBackfaceOcclusion: 0
-    - _SpecularBackfaceOcclusion1: 0
-    - _SpecularBias: 1
+    - _Smoothnessintensity: 1
     - _SpecularHighlights: 1
-    - _SpecularMapOffset: 0
-    - _SpecularMapScale: 1
-    - _SpecularPower: 1
-    - _SpecularScale: -5
-    - _SpecularStrength: 2
-    - _Specularpower: 0
     - _SrcBlend: 1
-    - _StrongWindSpeed: 1
-    - _SwitchVGreenToRGBA: 0
     - _TEXTUREMAPS: 0
     - _TEXTURESETTINGS: 0
-    - _TTFELIGHTTREEFOLIAGESHADER: 0
-    - _TranslucencyDirectIntensity: 1
-    - _TranslucencyFalloff: 0
-    - _TranslucencyFluffiness: 1
-    - _TranslucencyMapOffset: 0
-    - _TranslucencyMapScale: 1
-    - _TranslucencyPower: 1
-    - _TranslucencyRange: 1
-    - _TranslucencyTreeTangents: 1
+    - _TTFELIGHTTREEBARKSHADER: 0
+    - _ToggleSwitch0: 0
+    - _Tralal: 0
     - _UVSec: 0
-    - _VertexAo: 0
-    - _VertexLighting: 0
-    - _VertexNormalWarpAmount: 0
-    - _VertexPositionYOff: 1
-    - _VertexShadow: 0
-    - _VisualizeMass: 0
+    - _VertexAo1: 0
+    - _VertexPositionYOff: 0
+    - _VisuliseBarkMask: 0
+    - _VisuliseMask: 0
+    - _VizualiseMask: 1
     - _WINDMASKSETTINGS: 0
-    - _WindDirection: 0
-    - _WindOnOff: 1
-    - _WindType: 0
-    - _WorldUp: 0
+    - _WWW: 0
+    - _WindDirection: 1.0758609
+    - _WindType: 1
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _AlbedoColor: {r: 0.57254905, g: 0.6, b: 0.2901961, a: 0}
-    - _AlebedoColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DryLeafColor: {r: 0.5568628, g: 0.37306848, b: 0.17647055, a: 0}
-    - _Dryleafcolor: {r: 0.5568628, g: 0.37306848, b: 0.17647055, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector0: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
