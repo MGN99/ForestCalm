@@ -1,0 +1,51 @@
+﻿Tarea,PC-54,10067,Frontend: Validación de entrada de datos Login
+Tarea,PC-52,10057,Infraestructura: Desplegar backend en Docker Local
+Tarea,PC-51,10056,Infraestructura: Desplegar frontend en Azure Static Web Apps o Docker Local
+Tarea,PC-50,10055,Infraestructura: Configurar Azure SignalR Service
+Tarea,PC-49,10054,Frontend: Agregar sistema de notificaciones (campana)
+Tarea,PC-48,10053,Frontend: Mejorar diseño general y navegación
+Tarea,PC-47,10052,Frontend: Mostrar avisos en tiempo real (SignalR)
+Tarea,PC-46,10051,Frontend: Implementar chat directo (SignalR Client)
+Tarea,PC-45,10050,Frontend: Crear página “Avisos de Tutor”
+Tarea,PC-44,10049,Frontend: Crear vista “Suscripciones”
+Tarea,PC-43,10048,Frontend: Crear vista “Tutorías”
+Tarea,PC-42,10047,Backend: Implementar módulo de mensajes (chat)
+Tarea,PC-41,10046,Backend: Implementar avisos globales
+Tarea,PC-40,10045,Backend: Implementar sistema de suscripciones a tutores
+Tarea,PC-39,10044,Backend: Implementar endpoints para tutorías
+Tarea,PC-38,10043,Backend: Crear módulo: mensajes
+Tarea,PC-37,10042,Backend: Crear módulo: avisos de tutorías
+Tarea,PC-36,10041,Backend: Crear módulo: suscripciones a tutorías
+Tarea,PC-35,10040,Backend: Crear módulo users
+Tarea,PC-34,10039,Backend: Crear módulo: participantes de tutorías
+Tarea,PC-33,10038,Backend: Crear módulo: tutorías
+Tarea,PC-32,10037,Backend: Crear módulo auth (autenticación)
+Tarea,PC-31,10036,Seguridad Backend: Asegurar endpoints backend por roles
+Tarea,PC-30,10035,Backend: Preparar tablas base de datos iniciales
+Tarea,PC-29,10034,Frontend: Conectar todas las vistas al backend (Axios)
+Tarea,PC-28,10033,Frontend: Crear panel admin simple
+Tarea,PC-27,10032,Frontend: Implementar componente de reporte
+Tarea,PC-26,10031,Frontend: Implementar modal de comentarios
+Tarea,PC-25,10030,Frontend: Crear vista de detalle con comentarios + Aura
+Tarea,PC-24,10029,Frontend: Implementar formulario “Subir archivo”
+Tarea,PC-23,10028,Frontend: Crear vista principal con listado de archivos + Aura
+Tarea,PC-22,10027,Backend: Implementar sistema de reportes
+Tarea,PC-21,10026,Backend: Implementar sistema de comentarios
+Tarea,PC-20,10025,Backend: Implementar sistema Aura
+Tarea,PC-19,10024,Backend: Integrar Azure Blob Storage SDK
+Tarea,PC-18,10023,Backend: CRUD de archivos con Azure Blob Storage
+Tarea,PC-17,10022,Backend: Crear módulo: auras
+Tarea,PC-16,10021,Backend: Crear módulo: reportes
+Tarea,PC-15,10020,Backend: Crear módulo: comentarios
+Tarea,PC-14,10019,Backend: Crear módulo: archivos
+Tarea,PC-13,10018,Frontend: Conectar Login de frontend con lógica de backend
+Tarea,PC-12,10017,Frontend: Crear Home inicial con menú vacío
+Tarea,PC-11,10016,Frontend: Implementar formulario de Login
+Tarea,PC-10,10015,Frontend: Configurar tema base (Material UI o Tailwind)
+Tarea,PC-9,10014,Frontend: Inicializar proyecto React con Vite + TypeScript en repositorio Github
+Tarea,PC-8,10013,Backend: Configurar conexión TypeORM con PostgreSQL
+Tarea,PC-7,10012,Backend: Implementar autenticación JWT + Azure AD OAuth2
+Tarea,PC-5,10010,Backend: Inicializar proyecto NestJS con Clean Architecture en repositorio Github
+Tarea,PC-4,10009,Infraestructura: Configurar Azure Key Vault o archivo .env de manera local
+Tarea,PC-3,10008,Infraestructura: Conectar backend local con PostgreSQL en Azure
+Tarea,PC-2,10007,Infraestructura: Crear y configurar recursos en Azure
