@@ -10,6 +10,9 @@ EditorBuildSettings:
       Stylized Camping Kit.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: ba0aa778fff8e3a4287fb6b8d355258d
+  - enabled: 1
     path: Assets/Scenes/ForestScene.unity
     guid: dec9982c446184742b7e3ded387f8df0
   m_configObjects:
