@@ -2489,6 +2489,7 @@ GameObject:
   - component: {fileID: 370762569}
   - component: {fileID: 370762568}
   - component: {fileID: 370762567}
+  - component: {fileID: 370762570}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2557,6 +2558,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &370762570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370762566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2518c50cb3fc6a6458d4b743c2f69c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.PointableCanvasModule
+  m_SendPointerHoverToParent: 1
+  _useInitialPressPositionForDrag: 1
+  _exclusiveMode: 1
 --- !u!1 &374034109
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,7 +2723,7 @@ Transform:
   m_GameObject: {fileID: 398741638}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.47, y: 0.961, z: 18.964}
+  m_LocalPosition: {x: 16.031, y: 1.316, z: 38.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6689,15 +6705,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2354766451559400156, guid: bed228cf15436d1419df8202f7b61f5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.23
+      value: 15.27
       objectReference: {fileID: 0}
     - target: {fileID: 2354766451559400156, guid: bed228cf15436d1419df8202f7b61f5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.233044
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 2354766451559400156, guid: bed228cf15436d1419df8202f7b61f5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 38.97
+      value: 38.92
       objectReference: {fileID: 0}
     - target: {fileID: 2354766451559400156, guid: bed228cf15436d1419df8202f7b61f5b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11870,8 +11886,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444064558}
-  m_LocalRotation: {x: 0, y: -0.42261827, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 0, z: 38.845}
+  m_LocalRotation: {x: -0, y: -0.5642554, z: -0, w: 0.8256003}
+  m_LocalPosition: {x: 0, y: 0, z: 38.863}
   m_LocalScale: {x: 0.001, y: 0.001, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11881,10 +11897,10 @@ RectTransform:
   - {fileID: 81448111}
   - {fileID: 890451555}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -50, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -68.701, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 18.387, y: 1.973}
+  m_AnchoredPosition: {x: 15.363, y: 1.551}
   m_SizeDelta: {x: 500, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1451437695
@@ -12081,6 +12097,7 @@ GameObject:
   - component: {fileID: 1477899385}
   - component: {fileID: 1477899384}
   - component: {fileID: 1477899383}
+  - component: {fileID: 1477899388}
   m_Layer: 0
   m_Name: '[BuildingBlock] Camera Rig'
   m_TagString: Untagged
@@ -12179,7 +12196,7 @@ MonoBehaviour:
   requestEyeTrackingPermissionOnStartup: 0
   requestScenePermissionOnStartup: 0
   requestRecordAudioPermissionOnStartup: 0
-  _localDimming: 1
+  _localDimming: 0
   _trackingOriginType: 1
   usePositionTracking: 1
   useRotationTracking: 1
@@ -12234,15 +12251,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477899382}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21348755, y: 0.6276718, z: -0.16635019, w: 0.729917}
-  m_LocalPosition: {x: 17.932, y: 4.005, z: 39.839}
+  m_LocalRotation: {x: 0.06783001, y: 0.2161218, z: 0.06723283, w: 0.9716843}
+  m_LocalPosition: {x: 18.113, y: 2.118, z: 39.455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1128263789}
   - {fileID: 1592416218}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 31.365, y: 81.86, z: 1.688}
+  m_LocalEulerAnglesHint: {x: 5.898, y: 25.557, z: 9.255}
+--- !u!114 &1477899388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477899382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68674a8dfffe054e801a076d932f086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ForcePlayerRotation
+  startYRotation: 50
 --- !u!1 &1488826865
 GameObject:
   m_ObjectHideFlags: 0
@@ -16087,6 +16117,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3903482225804038118, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3903482225864869174, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -18730,6 +18764,10 @@ PrefabInstance:
     - target: {fileID: 7207433041434692174, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7218948594749983592, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
+      propertyPath: _skinWidth
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7238488532558302161, guid: 0a7d2469f24041c4284c66706f84c45e, type: 3}
       propertyPath: m_Layer
