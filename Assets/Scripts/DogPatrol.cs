@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+
 
 public class DogPatrol : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class DogPatrol : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
-    private int currentPoint = -1;   // Ningún punto inicial
+    private int currentPoint = -1;
     private int nextPoint = -1;
 
     private bool isBreathing = false;
@@ -42,7 +44,7 @@ public class DogPatrol : MonoBehaviour
 
         agent.speed = runSpeed;
         agent.acceleration = 20f;
-        agent.angularSpeed = 0f;   // El perro gira manualmente
+        agent.angularSpeed = 0f;
         agent.stoppingDistance = 0.15f;
 
         PickRandomNextPoint();
@@ -51,6 +53,12 @@ public class DogPatrol : MonoBehaviour
 
     void Update()
     {
+        if (!agent.isOnNavMesh)
+            Debug.LogError("⚠ El perro NO está en el NavMesh.");
+
+        if (agent.pathStatus == NavMeshPathStatus.PathInvalid)
+            Debug.LogError("⚠ Ruta inválida hacia el punto: " + nextPoint);
+
         if (isBreathing || isRotating)
         {
             if (isRotating)
@@ -59,7 +67,9 @@ public class DogPatrol : MonoBehaviour
         }
 
         float vel = agent.velocity.magnitude;
-        animator.SetFloat("speed", vel);
+
+        // ANIMACIÓN DE CORRER
+        animator.SetBool("isRunning", vel > 0.1f);
 
         // Llegó al punto
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -67,24 +77,16 @@ public class DogPatrol : MonoBehaviour
             StartCoroutine(BreathRoutine());
         }
 
-        // Rotación suave mientras corre
+        // Rotación suave
         if (vel > 0.1f)
         {
             Quaternion targetRot = Quaternion.LookRotation(agent.velocity.normalized);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRot,
-                Time.deltaTime * 5f
-            );
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 5f);
         }
     }
 
-    // Genera un destino aleatorio distinto del actual
     void PickRandomNextPoint()
     {
-        if (points.Length <= 1)
-            return;
-
         int randomIndex;
         do
         {
@@ -104,22 +106,23 @@ public class DogPatrol : MonoBehaviour
         agent.isStopped = false;
         agent.speed = runSpeed;
 
+        // ANIMACIONES
         animator.SetBool("isBreathing", false);
         animator.SetBool("isWalking", false);
+        animator.SetBool("isRunning", true);
 
         agent.SetDestination(points[currentPoint].position);
 
-        // Elegir nuevo punto aleatorio para después
         PickRandomNextPoint();
     }
 
-    // Rutina de respiración (idle)
-    System.Collections.IEnumerator BreathRoutine()
+    IEnumerator BreathRoutine()
     {
         isBreathing = true;
         agent.isStopped = true;
 
-        animator.SetFloat("speed", 0f);
+        // Apagar correr/caminar
+        animator.SetBool("isRunning", false);
         animator.SetBool("isWalking", false);
 
         yield return new WaitForSeconds(0.25f);
@@ -135,17 +138,16 @@ public class DogPatrol : MonoBehaviour
         StartRotatingToNextPoint();
     }
 
-    // Comienza a girar hacia el punto aleatorio
     void StartRotatingToNextPoint()
     {
         isRotating = true;
         agent.isStopped = true;
 
-        // Cambia a caminar
+        // Activar caminar
         animator.SetBool("isWalking", true);
+
         agent.speed = walkSpeed;
 
-        // Rotación hacia el siguiente punto aleatorio
         Vector3 dir = (points[nextPoint].position - transform.position).normalized;
         targetRotation = Quaternion.LookRotation(dir, Vector3.up);
     }
@@ -160,11 +162,13 @@ public class DogPatrol : MonoBehaviour
 
         float angle = Quaternion.Angle(transform.rotation, targetRotation);
 
-        // Terminó de rotar → correr al siguiente punto aleatorio
         if (angle < 2f)
         {
             isRotating = false;
+
             animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", true);
+
             GoToNextPoint();
         }
     }
