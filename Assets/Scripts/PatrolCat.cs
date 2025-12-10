@@ -3,196 +3,127 @@ using UnityEngine.AI;
 
 public class PatrolCat : MonoBehaviour
 {
-    [Header("Patrol Points")]
+    [Header("Patrol Points (m�nimo 2)")]
     public Transform[] points;
-    
-    [Header("Patrol Settings")]
-    public float waitTimeAtPoint = 2f;
-    public float movementSpeed = 1.5f;
-    
-    [Header("Cat Behavior")]
-    public float sitChance = 0.3f;
-    public float meowChance = 0.2f;
-    
+
+    [Header("Movement")]
+    public float movementSpeed = 0.8f;
+
+    [Header("Timing")]
+    public float sitMin = 2f;
+    public float sitMax = 4f;
+    public float meowChance = 0.3f;
+
+    [Header("Animations")]
+    public float walkAnimSpeed = 0.8f;
+
     private NavMeshAgent agent;
     private Animator animator;
-    private int destPoint = 0;
-    private bool isWaiting = false;
+
+    private int currentPoint = -1;  // empieza sin punto
     private bool isSitting = false;
+    private bool canMove = true;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+    }
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        
-        agent.autoBraking = false;
+        if (points.Length < 2)
+        {
+            Debug.LogError("Debes asignar al menos 2 puntos.");
+            enabled = false;
+            return;
+        }
+
         agent.speed = movementSpeed;
-        
-        // Verificar que el Animator tiene los parámetros necesarios
-        CheckAnimatorParameters();
-        
+        agent.acceleration = 15f;
+        agent.angularSpeed = 360f;
+        agent.stoppingDistance = 0.08f;
+
         GoToNextPoint();
-    }
-
-    void CheckAnimatorParameters()
-    {
-        // Verificar parámetros críticos
-        if (!HasParameter("isWalking", animator))
-        {
-            Debug.LogError("Parámetro 'isWalking' no encontrado en el Animator!");
-        }
-        if (!HasParameter("isSitting", animator))
-        {
-            Debug.LogError("Parámetro 'isSitting' no encontrado en el Animator!");
-        }
-        if (!HasParameter("meow", animator))
-        {
-            Debug.LogError("Parámetro 'meow' no encontrado en el Animator!");
-        }
-    }
-
-    // Método para verificar si un parámetro existe
-    bool HasParameter(string paramName, Animator animator)
-    {
-        foreach (AnimatorControllerParameter param in animator.parameters)
-        {
-            if (param.name == paramName) return true;
-        }
-        return false;
-    }
-
-    void GoToNextPoint()
-    {
-        if (points.Length == 0)
-        {
-            Debug.LogWarning("No hay Patrol Points asignados!");
-            SetIdle();
-            return;
-        }
-        
-        float randomAction = Random.Range(0f, 1f);
-        
-        if (isSitting)
-        {
-            StandUp();
-            Invoke("GoToNextPoint", 1f);
-            return;
-        }
-        else if (randomAction < meowChance && HasParameter("meow", animator))
-        {
-            Meow();
-            Invoke("ContinuePatrol", 2f);
-            return;
-        }
-        else if (randomAction < meowChance + sitChance && HasParameter("isSitting", animator))
-        {
-            SitDown();
-            return;
-        }
-        else
-        {
-            ContinuePatrol();
-        }
-    }
-
-    void ContinuePatrol()
-    {
-        if (points.Length == 0) return;
-        
-        SetWalking();
-        agent.destination = points[destPoint].position;
-        destPoint = (destPoint + 1) % points.Length;
-        isWaiting = false;
     }
 
     void Update()
     {
-        // Actualizar animación de caminar solo si el parámetro existe
-        if (animator != null && HasParameter("isWalking", animator))
+        if (!canMove || isSitting)
+            return;
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            bool isMoving = agent.velocity.magnitude > 0.1f;
-            animator.SetBool("isWalking", isMoving);
+            StartCoroutine(SitRoutine());
         }
-        
-        if (!isWaiting && !isSitting && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+
+        float vel = agent.velocity.magnitude;
+        bool walking = vel > 0.03f;
+
+        animator.SetBool("isWalking", walking);
+        animator.speed = walking ? walkAnimSpeed : 1f;
+
+        if (agent.velocity.sqrMagnitude > 0.01f)
         {
-            isWaiting = true;
-            SetIdle();
-            Invoke("GoToNextPoint", waitTimeAtPoint);
+            Quaternion targetRot = Quaternion.LookRotation(agent.velocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 5f);
         }
     }
 
-    void SetWalking()
+    // ------------------------------
+    //   Seleccionar un punto aleatorio
+    // ------------------------------
+    void GoToNextPoint()
     {
-        if (HasParameter("isWalking", animator))
-            animator.SetBool("isWalking", true);
-        if (HasParameter("isSitting", animator))
-            animator.SetBool("isSitting", false);
-    }
+        int newPoint = currentPoint;
 
-    void SetIdle()
-    {
-        if (HasParameter("isWalking", animator))
-            animator.SetBool("isWalking", false);
-        if (HasParameter("isSitting", animator))
-            animator.SetBool("isSitting", false);
-    }
+        // garantiza que NO repita el mismo punto
+        while (newPoint == currentPoint)
+        {
+            newPoint = Random.Range(0, points.Length);
+        }
 
-    void SitDown()
-    {
-        isSitting = true;
-        if (HasParameter("isWalking", animator))
-            animator.SetBool("isWalking", false);
-        if (HasParameter("isSitting", animator))
-            animator.SetBool("isSitting", true);
-        
-        Invoke("StandUp", Random.Range(3f, 6f));
-    }
+        currentPoint = newPoint;
 
-    void StandUp()
-    {
+        canMove = true;
         isSitting = false;
-        if (HasParameter("isSitting", animator))
-            animator.SetBool("isSitting", false);
-        
-        Invoke("GoToNextPoint", 1f);
+
+        agent.isStopped = false;
+        agent.SetDestination(points[currentPoint].position);
+
+        animator.SetBool("isSitting", false);
+        animator.SetBool("isWalking", true);
+        animator.speed = walkAnimSpeed;
     }
 
-    void Meow()
+    // ------------------------------
+    //   Rutina de sentarse + maullar
+    // ------------------------------
+    System.Collections.IEnumerator SitRoutine()
     {
-        if (HasParameter("meow", animator))
-            animator.SetTrigger("meow");
-        SetIdle();
-    }
-    
-    public void AddPoint(Transform newPoint)
-    {
-        Transform[] newPoints = new Transform[points.Length + 1];
-        for (int i = 0; i < points.Length; i++)
-        {
-            newPoints[i] = points[i];
-        }
-        newPoints[points.Length] = newPoint;
-        points = newPoints;
-    }
+        canMove = false;
+        agent.isStopped = true;
 
-    void OnDrawGizmosSelected()
-    {
-        if (points != null && points.Length > 1)
-        {
-            Gizmos.color = Color.blue;
-            for (int i = 0; i < points.Length; i++)
-            {
-                if (points[i] != null)
-                {
-                    int next = (i + 1) % points.Length;
-                    if (points[next] != null)
-                    {
-                        Gizmos.DrawLine(points[i].position, points[next].position);
-                        Gizmos.DrawWireSphere(points[i].position, 0.3f);
-                    }
-                }
-            }
-        }
+        animator.SetBool("isWalking", false);
+        animator.speed = 1f;
+
+        yield return new WaitForSeconds(0.25f);
+
+        animator.SetBool("isSitting", true);
+        isSitting = true;
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (Random.value < meowChance)
+            animator.SetTrigger("meowTrigger");
+
+        yield return new WaitForSeconds(Random.Range(sitMin, sitMax));
+
+        animator.SetBool("isSitting", false);
+        isSitting = false;
+
+        yield return new WaitForSeconds(0.6f);
+
+        GoToNextPoint();
     }
 }
