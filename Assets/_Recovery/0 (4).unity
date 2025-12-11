@@ -14327,14 +14327,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4592639424432502877, guid: db28e7af2216e7043b9b54ec4c03231c, type: 3}
-      propertyPath: runSpeed
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592639424432502877, guid: db28e7af2216e7043b9b54ec4c03231c, type: 3}
-      propertyPath: walkSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4592639424432502877, guid: db28e7af2216e7043b9b54ec4c03231c, type: 3}
       propertyPath: points.Array.size
       value: 4
       objectReference: {fileID: 0}
