@@ -23,6 +23,7 @@ TagManager:
   - QDSUIPrimaryButton
   - QDSUITextInvertedColor
   - QDSUITextSecondaryInvertedColor
+  - Comida
   layers:
   - Default
   - TransparentFX

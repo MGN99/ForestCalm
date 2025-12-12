@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 238ddee7d297599499306a35ccb945a6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meowSound: {fileID: 8300000, guid: 94ac997d738cff24d8b991c59da27ab0, type: 3}
+  - eatSound: {fileID: 8300000, guid: cc687f6e69294d144a2ab66e9c6431e3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
