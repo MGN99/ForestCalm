@@ -6477,6 +6477,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3990020962623386524, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: aa5e9b9de2a4b4f478899ad0ccafff8b, type: 3}
+    - target: {fileID: 3990020962623386524, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3990020962623386524, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6083877950385228632, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.15
@@ -6530,6 +6542,10 @@ PrefabInstance:
       value: -8.228
       objectReference: {fileID: 0}
     - target: {fileID: 8510432668887803650, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+      propertyPath: xpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: aa5e9b9de2a4b4f478899ad0ccafff8b, type: 3}
+    - target: {fileID: 8510432668887803650, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
       propertyPath: eatSound
       value: 
       objectReference: {fileID: 8300000, guid: 2911c6f42a7ccd9479133eec299953c5, type: 3}
@@ -6550,6 +6566,10 @@ PrefabInstance:
       value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8510432668887803650, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+      propertyPath: heartEffectPrefab
+      value: 
+      objectReference: {fileID: 6147117481969751552, guid: fd83b443948658046b579c000924aa3f, type: 3}
+    - target: {fileID: 8510432668887803650, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
       propertyPath: points.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -6569,8 +6589,7 @@ PrefabInstance:
       propertyPath: 'points.Array.data[3]'
       value: 
       objectReference: {fileID: 1368072137}
-    m_RemovedComponents:
-    - {fileID: 3990020962623386524, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2981356745237407737, guid: 879c19b94b8b1ac459893a2223efbd8a, type: 3}

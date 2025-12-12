@@ -4,8 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - heartEffectPrefab: {fileID: 6147117481969751552, guid: fd83b443948658046b579c000924aa3f, type: 3}
   - meowSound: {fileID: 8300000, guid: 3562bea7da5bc9348a755f6f208184ff, type: 3}
   - eatSound: {fileID: 8300000, guid: 2911c6f42a7ccd9479133eec299953c5, type: 3}
+  - xpSound: {fileID: 8300000, guid: aa5e9b9de2a4b4f478899ad0ccafff8b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

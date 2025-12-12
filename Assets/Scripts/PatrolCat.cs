@@ -17,7 +17,10 @@ public class PatrolCat : MonoBehaviour
     [Header("Interaction & Feeding")]
     public string foodTag = "Comida";
     public float eatDuration = 3.0f;
-    public float waitBeforeDisappear = 3.0f; // --- NUEVO: Tiempo de espera final ---
+    public float waitBeforeDisappear = 3.0f;
+    // --- NUEVO: Variable para el efecto de corazones ---
+    [Tooltip("Arrastra aquí el Prefab del sistema de partículas de corazones")]
+    public GameObject heartEffectPrefab;
 
     [Header("Animations")]
     public float walkAnimSpeed = 0.9f;
@@ -25,6 +28,7 @@ public class PatrolCat : MonoBehaviour
     [Header("Audio SFX")]
     public AudioClip meowSound;
     public AudioClip eatSound;
+    public AudioClip xpSound;
     private AudioSource audioSource;
 
     private NavMeshAgent agent;
@@ -34,7 +38,7 @@ public class PatrolCat : MonoBehaviour
     private bool isSitting = false;
     private bool canMove = true;
     private bool isEating = false;
-    private bool isLeaving = false; // --- NUEVO: Estado para saber si se está yendo ---
+    private bool isLeaving = false;
 
     void Awake()
     {
@@ -45,9 +49,14 @@ public class PatrolCat : MonoBehaviour
 
     void Start()
     {
+        if (points.Length < 3)
+        {
+            Debug.LogWarning("Se recomiendan al menos 3 puntos para la lógica de retroceso.");
+        }
+
         if (points.Length < 2)
         {
-            Debug.LogError("Necesitas puntos para patrullar.");
+            Debug.LogError("Necesitas al menos 2 puntos para patrullar.");
             enabled = false;
             return;
         }
@@ -61,7 +70,6 @@ public class PatrolCat : MonoBehaviour
 
     void Update()
     {
-        // --- MODIFICADO: Agregamos !isLeaving para que no interrumpa la salida
         if (!canMove || isSitting || isEating || isLeaving)
             return;
 
@@ -70,11 +78,9 @@ public class PatrolCat : MonoBehaviour
             CheckArrivalBehavior();
         }
 
-        // Manejo de animaciones (común para patrulla y salida)
         HandleAnimations();
     }
 
-    // Saqué esto a una función aparte para usarlo también en la rutina de salida
     void HandleAnimations()
     {
         float vel = agent.velocity.magnitude;
@@ -106,7 +112,7 @@ public class PatrolCat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isEating || isLeaving) return; // --- MODIFICADO: Ignorar si ya se va ---
+        if (isEating || isLeaving) return;
         if (!isSitting) return;
 
         if (other.CompareTag(foodTag))
@@ -134,51 +140,66 @@ public class PatrolCat : MonoBehaviour
 
         if (foodObject != null) Destroy(foodObject);
 
+        // Esperar a que termine de masticar
         yield return new WaitForSeconds(eatDuration);
 
-        // --- AQUÍ EMPIEZA EL CAMBIO ---
-        // Ya no reiniciamos el ciclo. Iniciamos la secuencia de salida.
+        // --- NUEVO: LANZAR EFECTO DE CORAZONES ---
+        if (heartEffectPrefab != null)
+        {
+            // Creamos el efecto en la posición del gato, un poco más arriba (Vector3.up * 0.5f)
+            // y con la misma rotación que el gato.
+            GameObject hearts = Instantiate(heartEffectPrefab, transform.position + Vector3.up * 1.0f, heartEffectPrefab.transform.rotation);
+            PlaySound(xpSound);
+
+            // Importante: Destruir el efecto después de unos segundos para que no llene la escena
+            Destroy(hearts, 3.0f);
+        }
+
+        // Opcional: Reproducir sonido de "amor" o satisfacción aquí
+        // PlaySound(loveSound);
+
         StartCoroutine(LeaveAndDestroyRoutine());
     }
 
-    // --- NUEVA RUTINA: Volver al penúltimo punto y desaparecer ---
     IEnumerator LeaveAndDestroyRoutine()
     {
         isEating = false;
-        isLeaving = true; // Activamos modo salida
+        isLeaving = true;
         isSitting = false;
         animator.SetBool("isSitting", false);
 
-        // 1. Calcular el índice del penúltimo punto
-        // points.Length - 1 es el último. points.Length - 2 es el penúltimo.
-        int penultimateIndex = points.Length - 2;
+        int firstBackIndex = points.Length - 2;
 
-        // Seguridad por si solo hay 2 puntos en total
-        if (penultimateIndex < 0) penultimateIndex = 0;
-
-        // 2. Moverse hacia allá
-        agent.isStopped = false;
-        agent.SetDestination(points[penultimateIndex].position);
-
-        // Esperar mientras camina hacia el punto de salida...
-        // Hacemos un bucle manual porque el Update ya no controla esto debido a 'isLeaving'
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        if (firstBackIndex >= 0)
         {
-            HandleAnimations(); // Mantener la animación de caminar actualizada
-            yield return null; // Esperar al siguiente frame
+            agent.isStopped = false;
+            agent.SetDestination(points[firstBackIndex].position);
+
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            {
+                HandleAnimations();
+                yield return null;
+            }
         }
 
-        // 3. Ha llegado al penúltimo punto. Parar.
+        int secondBackIndex = points.Length - 3;
+
+        if (secondBackIndex >= 0)
+        {
+            agent.SetDestination(points[secondBackIndex].position);
+
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            {
+                HandleAnimations();
+                yield return null;
+            }
+        }
+
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
 
-        // Opcional: Que se siente o haga una pose antes de irse
-        // animator.SetBool("isSitting", true); 
-
-        // 4. Esperar unos segundos
         yield return new WaitForSeconds(waitBeforeDisappear);
 
-        // 5. Desaparecer (Destruir el objeto)
         Destroy(gameObject);
     }
 
@@ -226,7 +247,7 @@ public class PatrolCat : MonoBehaviour
 
             if (Random.value < 0.3f)
             {
-                if (!isEating && !isLeaving) // Chequeo extra
+                if (!isEating && !isLeaving)
                 {
                     animator.SetTrigger("meowTrigger");
                     PlaySound(meowSound);
