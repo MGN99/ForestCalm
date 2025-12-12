@@ -5,6 +5,9 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class PatrolCat : MonoBehaviour
 {
+    [Header("Secuencia")]
+    public GameObject dogObject;
+
     [Header("Patrol Points (Ordenados)")]
     public Transform[] points;
 
@@ -155,8 +158,11 @@ public class PatrolCat : MonoBehaviour
             Destroy(hearts, 3.0f);
         }
 
-        // Opcional: Reproducir sonido de "amor" o satisfacción aquí
-        // PlaySound(loveSound);
+        // --- ACTIVAR AL PERRO ---
+        if (dogObject != null)
+        {
+            dogObject.SetActive(true); // ¡El perro aparece y empieza su script!
+        }
 
         StartCoroutine(LeaveAndDestroyRoutine());
     }

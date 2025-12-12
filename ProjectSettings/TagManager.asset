@@ -24,6 +24,7 @@ TagManager:
   - QDSUITextInvertedColor
   - QDSUITextSecondaryInvertedColor
   - Comida
+  - ComidaPerro
   layers:
   - Default
   - TransparentFX
