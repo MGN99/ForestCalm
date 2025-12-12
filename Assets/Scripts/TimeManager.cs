@@ -1,131 +1,73 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class TimeManager : MonoBehaviour
 {
+    [Header("Skybox Textures")]
     [SerializeField] private Texture2D skyboxNight;
-    [SerializeField] private Texture2D skyboxSunrise;
-    [SerializeField] private Texture2D skyboxDay;
-    [SerializeField] private Texture2D skyboxSunset;
- 
-    [SerializeField] private Gradient graddientNightToSunrise;
-    [SerializeField] private Gradient graddientSunriseToDay;
-    [SerializeField] private Gradient graddientDayToSunset;
-    [SerializeField] private Gradient graddientSunsetToNight;
- 
-    [SerializeField] private Light globalLight;
- 
-    private int minutes;
- 
-    public int Minutes
-    { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
- 
-    private int hours = 5;
- 
-    public int Hours
-    { get { return hours; } set { hours = value; OnHoursChange(value); } }
- 
-    private int days;
- 
-    public int Days
-    { get { return days; } set { days = value; } }
- 
-    private float tempSecond;
+    [SerializeField] private Texture2D skyboxRainy;
 
+    [Header("Cycle Durations (seconds)")]
+    [SerializeField] private float nightDuration = 20f;
+    [SerializeField] private float rainyDuration = 20f;
+
+    [Header("Light Settings")]
+    [SerializeField] private Light globalLight;
+
+    [Header("Transition Settings")]
+    [SerializeField] private float transitionTime = 5f;
+
+    private enum SkyState { Night, Rainy }
+    private SkyState currentState;
 
     private void Start()
     {
-        Days = 0;
-        Hours = 5;
-        Minutes = 0;
-        tempSecond = 0;
+        currentState = SkyState.Night;
 
+        // Iniciar con Night
         RenderSettings.skybox.SetTexture("_Texture1", skyboxNight);
         RenderSettings.skybox.SetTexture("_Texture2", skyboxNight);
         RenderSettings.skybox.SetFloat("_Blend", 0f);
 
-        if (graddientNightToSunrise != null)
-        {
-            globalLight.color = graddientNightToSunrise.Evaluate(0f);
-            RenderSettings.fogColor = globalLight.color;
-        }
-
-        globalLight.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        StartCoroutine(CycleRoutine());
     }
 
- 
-    public void Update()
+    private IEnumerator CycleRoutine()
     {
-        tempSecond += Time.deltaTime;
- 
-        if (tempSecond >= 1)
+        while (true)
         {
-            Minutes += 1;
-            tempSecond = 0;
+            if (currentState == SkyState.Night)
+            {
+                yield return new WaitForSeconds(nightDuration);
+                StartCoroutine(LerpSkybox(skyboxNight, skyboxRainy, transitionTime));
+                currentState = SkyState.Rainy;
+            }
+            else if (currentState == SkyState.Rainy)
+            {
+                yield return new WaitForSeconds(rainyDuration);
+                StartCoroutine(LerpSkybox(skyboxRainy, skyboxNight, transitionTime));
+                currentState = SkyState.Night;
+            }
+
+            // Esperar transición
+            yield return new WaitForSeconds(transitionTime);
         }
     }
- 
-    private void OnMinutesChange(int value)
+
+    private IEnumerator LerpSkybox(Texture2D from, Texture2D to, float time)
     {
-        globalLight.transform.Rotate(Vector3.up, (1f / (1440f / 4f)) * 360f, Space.World);
-        if (value >= 60)
-        {
-            Hours++;
-            minutes = 0;
-        }
-        if (Hours >= 24)
-        {
-            Hours = 0;
-            Days++;
-        }
-    }
- 
-    private void OnHoursChange(int value)
-    {
-        if (value == 6)
-        {
-            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
-            StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
-        }
-        else if (value == 8)
-        {
-            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
-            StartCoroutine(LerpLight(graddientSunriseToDay, 10f));
-        }
-        else if (value == 18)
-        {
-            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
-            StartCoroutine(LerpLight(graddientDayToSunset, 10f));
-        }
-        else if (value == 22)
-        {
-            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
-            StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
-        }
-    }
- 
-    private IEnumerator LerpSkybox(Texture2D a, Texture2D b, float time)
-    {
-        RenderSettings.skybox.SetTexture("_Texture1", a);
-        RenderSettings.skybox.SetTexture("_Texture2", b);
+        RenderSettings.skybox.SetTexture("_Texture1", from);
+        RenderSettings.skybox.SetTexture("_Texture2", to);
         RenderSettings.skybox.SetFloat("_Blend", 0);
-        for (float i = 0; i < time; i += Time.deltaTime)
+
+        for (float t = 0; t < time; t += Time.deltaTime)
         {
-            RenderSettings.skybox.SetFloat("_Blend", i / time);
+            RenderSettings.skybox.SetFloat("_Blend", t / time);
             yield return null;
         }
-        RenderSettings.skybox.SetTexture("_Texture1", b);
-    }
- 
-    private IEnumerator LerpLight(Gradient lightGradient, float time)
-    {
-        for (float i = 0; i < time; i += Time.deltaTime)
-        {
-            globalLight.color = lightGradient.Evaluate(i / time);
-            RenderSettings.fogColor = globalLight.color;
-            yield return null;
-        }
+
+        // Aplicar definitivamente el nuevo skybox
+        RenderSettings.skybox.SetTexture("_Texture1", to);
+        RenderSettings.skybox.SetFloat("_Blend", 0);
     }
 }
