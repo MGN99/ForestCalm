@@ -9,6 +9,11 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene("ForestScene");
     }
 
+    public void GoToMeditation()
+    {
+        SceneManager.LoadScene("ForestMeditationScene");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
