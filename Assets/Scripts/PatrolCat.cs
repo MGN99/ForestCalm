@@ -15,7 +15,7 @@ public class PatrolCat : MonoBehaviour
     public float movementSpeed = 0.9f;
 
     [Header("Timing")]
-    public float meowChance = 0.3f;
+    public float meowChance = 0.5f;
 
     [Header("Interaction & Feeding")]
     public string foodTag = "Comida";
@@ -174,36 +174,31 @@ public class PatrolCat : MonoBehaviour
         isSitting = false;
         animator.SetBool("isSitting", false);
 
-        int firstBackIndex = points.Length - 2;
+        //agente pueda moverse
+        agent.isStopped = false;
 
-        if (firstBackIndex >= 0)
+        // INICIO DEL BUCLE:
+        // Empezamos en el penúltimo punto (points.Length - 2)
+        // y vamos bajando (i--) hasta llegar al punto 0 (i >= 0).
+        for (int i = points.Length - 2; i >= 0; i--)
         {
-            agent.isStopped = false;
-            agent.SetDestination(points[firstBackIndex].position);
+            // 1. Asignar destino actual del bucle
+            agent.SetDestination(points[i].position);
 
+            // 2. Esperar a que llegue a ese punto
             while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
             {
-                HandleAnimations();
+                HandleAnimations(); // Mantener animaciones fluidas
                 yield return null;
             }
-        }
 
-        int secondBackIndex = points.Length - 3;
-
-        if (secondBackIndex >= 0)
-        {
-            agent.SetDestination(points[secondBackIndex].position);
-
-            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
-            {
-                HandleAnimations();
-                yield return null;
-            }
+            // yield return new WaitForSeconds(0.5f); 
         }
 
         agent.isStopped = true;
         animator.SetBool("isWalking", false);
 
+        // Esperar antes de desaparecer
         yield return new WaitForSeconds(waitBeforeDisappear);
 
         Destroy(gameObject);
@@ -248,10 +243,10 @@ public class PatrolCat : MonoBehaviour
 
         while (true)
         {
-            float tiempoEspera = Random.Range(3.0f, 6.0f);
+            float tiempoEspera = Random.Range(2.0f, 4.0f);
             yield return new WaitForSeconds(tiempoEspera);
 
-            if (Random.value < 0.3f)
+            if (Random.value < 0.6f)
             {
                 if (!isEating && !isLeaving)
                 {
